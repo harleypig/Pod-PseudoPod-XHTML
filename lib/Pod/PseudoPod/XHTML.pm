@@ -58,32 +58,29 @@ sub new {
 
 }
 
-{ # These definitions are found at http://www.w3.org/QA/2002/04/valid-dtd-list.html
+{ # These definitions are found at http://www.w3.org/TR/xhtml1/#strict
 
 my %dtd = {
 
   # XHTML 1.0 - Strict
 
-  'strict' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  'strict' => q{<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 },
 
   # XHTML 1.0 - Transitional
 
-  'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  'transitional' => q{<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 },
 
   # XHTML 1.0 - Frameset
 
-  'frameset' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+  'frameset' => q{<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-},
-
-  # XHTML 1.1 - DTD
-
-  'xhtml11' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 },
 };
 
@@ -111,7 +108,6 @@ sub _get_dtd {
 sub dtd_frameset     { $_[0]->_set_dtd( 'frameset'     ) }
 sub dtd_strict       { $_[0]->_set_dtd( 'strict'       ) }
 sub dtd_transitional { $_[0]->_set_dtd( 'transitional' ) }
-sub dtd_xhtml11      { $_[0]->_set_dtd( 'xhtml11'      ) }
 
 sub start_Document {
 
@@ -139,8 +135,8 @@ $dtd
 
 sub end_item_text   { $_[0]{'scratch'} = '</li>' }
 
-sub end_F   { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
-sub end_Z   { $_[0]{'scratch'} .= '" />' }
+sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
+sub end_Z { $_[0]{'scratch'} .= '" />' }
 
 =head1 METHODS
 
@@ -155,10 +151,6 @@ Use the Transitional DTD.
 =head2 dtd_frameset
 
 Use the Frameset DTD
-
-=head2 dtd_xhtml11
-
-Use the XHTML1.1 DTD
 
 =head1 SEE ALSO
 
