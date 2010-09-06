@@ -5,6 +5,8 @@ use strict;
 
 use base qw( Pod::PseudoPod::HTML );
 
+use Carp;
+
 =head1 NAME
 
 Pod::PseudoPod::XHTML -- format PseudoPod as valid XHTML
@@ -16,7 +18,6 @@ Version 0.01
 =cut
 
 our $VERSION = '0.01';
-
 
 =head1 SYNOPSIS
 
@@ -43,8 +44,6 @@ jmcnamara's work on the Modern Perl epub book generator and massaged to work.
 
 Nothing is exported.
 
-=head1 METHODS
-
 =cut
 
 sub new {
@@ -53,10 +52,117 @@ sub new {
   my $new  = $self->SUPER::new( @_ );
 
   $new->accept_targets( 'xhtml', 'XHTML' );
+  $new->dtd_strict;
 
   return $new;
 
 }
+
+{ # These definitions are found at http://www.w3.org/QA/2002/04/valid-dtd-list.html
+
+my %dtd = {
+
+  # XHTML 1.0 - Strict
+
+  'strict' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+},
+
+  # XHTML 1.0 - Transitional
+
+  'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+},
+
+  # XHTML 1.0 - Frameset
+
+  'frameset' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+},
+
+  # XHTML 1.1 - DTD
+
+  'xhtml11' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+},
+};
+
+sub _set_dtd {
+
+  my ( $self, $type ) = @_;
+
+  croak "unknown dtd ($type)" unless exists $dtd{ $type };
+
+  $self->{ 'dtd' } = $type;
+
+}
+
+sub _get_dtd {
+
+  my $self = shift;
+
+  croak "unknown dtd ($self->{ 'dtd' })" unless exists $self->{ 'dtd' };
+
+  return $dtd{ $self->{ 'dtd' } };
+
+}
+};
+
+sub dtd_frameset     { $_[0]->_set_dtd( 'frameset'     ) }
+sub dtd_strict       { $_[0]->_set_dtd( 'strict'       ) }
+sub dtd_transitional { $_[0]->_set_dtd( 'transitional' ) }
+sub dtd_xhtml11      { $_[0]->_set_dtd( 'xhtml11'      ) }
+
+sub start_Document {
+
+  my $self = shift;
+
+  if ( $self->{ 'body_tags' } ) {
+
+    my $dtd = $self->_get_dtd;
+
+    $self->{ 'scratch' } .= qq{<?xml version="1.0" encoding="UTF-8"?>
+$dtd
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+};
+    $self->{ 'scratch' } .= "<link rel='stylesheet' href='style.css' type='text/css' />\n" if $self->{ 'css_tags' };
+    $self->{ 'scratch' } .= q{</head><body>};
+
+    $self->emit('nowrap');
+
+  }
+}
+
+# Override inherited functions to handle self-contained tags and proper closing of tags.
+
+sub end_item_text   { $_[0]{'scratch'} = '</li>' }
+
+sub end_F   { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
+sub end_Z   { $_[0]{'scratch'} .= '" />' }
+
+=head1 METHODS
+
+=head2 dtd_strict
+
+Use the Strict DTD. (Default)
+
+=head2 dtd_transitional
+
+Use the Transitional DTD.
+
+=head2 dtd_frameset
+
+Use the Frameset DTD
+
+=head2 dtd_xhtml11
+
+Use the XHTML1.1 DTD
+
+=head1 SEE ALSO
+
+L<Pod::PseudoPod::HTML>, L<Pod::PseudoPod>, L<Pod::Simple>
 
 =head1 AUTHOR
 
