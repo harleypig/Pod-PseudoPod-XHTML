@@ -2,10 +2,6 @@ use strict;
 use warnings;
 use Module::Build;
 
-# b Module::Base::_pod_parse
-
-$DB::single = 1;
-
 my $builder = Module::Build->new(
 
     module_name         => 'Pod::PseudoPod::XHTML',
@@ -14,7 +10,7 @@ my $builder = Module::Build->new(
 
     create_makefile_pl  => 'traditional',
 
-    build_requires      => { 'Test::More' => 0 },
+    build_requires      => { 'Test::More' => 0, 'Test::NoWarnings' => 0 },
     requires            => { 'Pod::PseudoPod::HTML' => 0 },
 
     dist_author         => q{Alan Young <alansyoungiii@gmail.com>},

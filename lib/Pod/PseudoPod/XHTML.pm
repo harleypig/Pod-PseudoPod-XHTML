@@ -73,12 +73,6 @@ my %dtd = (
   'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 },
-
-  # XHTML 1.0 - Frameset
-
-  'frameset' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-},
 );
 
 sub _set_dtd {
@@ -102,7 +96,6 @@ sub _get_dtd {
 }
 };
 
-sub dtd_frameset     { $_[0]->_set_dtd( 'frameset'     ) }
 sub dtd_strict       { $_[0]->_set_dtd( 'strict'       ) }
 sub dtd_transitional { $_[0]->_set_dtd( 'transitional' ) }
 

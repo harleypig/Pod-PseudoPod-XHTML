@@ -4,6 +4,7 @@ author:
   - 'Alan Young <alansyoungiii@gmail.com>'
 build_requires:
   Test::More: 0
+  Test::NoWarnings: 0
 configure_requires:
   Module::Build: 0.36
 dynamic_config: 0

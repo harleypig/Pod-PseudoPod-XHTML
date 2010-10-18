@@ -1,11 +1,8 @@
 #!perl -w
 
-#BEGIN {
-#    chdir 't' if -d 't';
-#}
-
 use strict;
-use Test::More tests => 31;
+use Test::More tests => 35;
+use Test::NoWarnings;
 
 use_ok('Pod::PseudoPod::XHTML') or exit;
 
@@ -68,7 +65,6 @@ Grindelwald to drive the cog train to Murren. Can you repeat that?</p>
 
 EOHTML
 
-if ( 0 ) {
 initialize($parser, $results);
 $parser->parse_string_document(<<'EOPOD');
 =over
@@ -96,9 +92,7 @@ world!</li>
 </ul>
 
 EOHTML
-}
 
-if ( 0 ) {
 initialize($parser, $results);
 $parser->parse_string_document(<<'EOPOD');
 =over
@@ -126,7 +120,6 @@ world!</li>
 </ol>
 
 EOHTML
-}
 
 initialize($parser, $results);
 $parser->parse_string_document(<<'EOPOD');
@@ -199,83 +192,169 @@ is($results, <<"EOHTML", "footnote entity in a paragraph");
 EOHTML
 
 
-#initialize($parser, $results);
-#$parser->add_body_tags(1);
-#$parser->parse_string_document(<<'EOPOD');
-#=pod
-#
-#A plain paragraph with body tags turned on.
-#EOPOD
-#is($results, <<"EOHTML", "adding html body tags");
-#<html>
-#<body>
-#
-#<p>A plain paragraph with body tags turned on.</p>
-#
-#</body>
-#</html>
-#
-#EOHTML
+initialize($parser, $results);
+$parser->add_body_tags(1);
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with body tags turned on.
+EOPOD
+is($results, <<"EOHTML", "adding default html body tags");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head><body>
+
+<p>A plain paragraph with body tags turned on.</p>
+
+</body>
+</html>
+
+EOHTML
+
+initialize($parser, $results);
+$parser->add_body_tags(1);
+$parser->dtd_strict;
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with body tags turned on.
+EOPOD
+is($results, <<"EOHTML", "adding strict html body tags");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head><body>
+
+<p>A plain paragraph with body tags turned on.</p>
+
+</body>
+</html>
+
+EOHTML
 
 
-#initialize($parser, $results);
-#$parser->add_body_tags(1);
-#$parser->add_css_tags(1);
-#$parser->parse_string_document(<<'EOPOD');
-#=pod
-#
-#A plain paragraph with body tags and css tags turned on.
-#EOPOD
-#is($results, <<"EOHTML", "adding html body tags and css tags");
-#<html>
-#<body>
-#<link rel='stylesheet' href='style.css' type='text/css'>
-#
-#<p>A plain paragraph with body tags and css tags turned on.</p>
-#
-#</body>
-#</html>
-#
-#EOHTML
+initialize($parser, $results);
+$parser->add_body_tags(1);
+$parser->dtd_transitional;
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with body tags turned on.
+EOPOD
+is($results, <<"EOHTML", "adding transitional html body tags");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head><body>
+
+<p>A plain paragraph with body tags turned on.</p>
+
+</body>
+</html>
+
+EOHTML
 
 
-#initialize($parser, $results);
-#$parser->add_css_tags(1);
-#$parser->parse_string_document(<<'EOPOD');
-#=pod
-#
-#A plain paragraph with aN<footnote entry> and css tags.
-#EOPOD
-#is($results, <<"EOHTML", "css footnote entity in a paragraph");
-#<p>A plain paragraph with a<font class="footnote"> (footnote: footnote
-#entry)</font> and css tags.</p>
-#
-#EOHTML
+initialize($parser, $results);
+$parser->add_body_tags(1);
+$parser->add_css_tags(1);
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with body tags and css tags turned on.
+EOPOD
+is($results, <<"EOHTML", "adding html body tags and css tags");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel='stylesheet' href='style.css' type='text/css' />
+</head><body>
+
+<p>A plain paragraph with body tags and css tags turned on.</p>
+
+</body>
+</html>
+
+EOHTML
 
 
-#initialize($parser, $results);
-#$parser->add_css_tags(1);
-#$parser->parse_string_document(<<'EOPOD');
-#=pod
-#
-#A plain paragraph with a U<http://test.url.com/stuff/and/junk.txt>.
-#EOPOD
-#is($results, <<"EOHTML", "URL entity in a paragraph");
-#<p>A plain paragraph with a <font
-#class="url">http://test.url.com/stuff/and/junk.txt</font>.</p>
-#
-#EOHTML
+initialize($parser, $results);
+$parser->add_css_tags(1);
+$parser->add_body_tags(1);
+$parser->dtd_transitional;
+$parser->parse_string_document(<<'EOPOD');
+=pod
 
-#initialize($parser, $results);
-#$parser->parse_string_document(<<'EOPOD');
-#=pod
-#
-#A plain paragraph with a Z<crossreferenceendpoint>.
-#EOPOD
-#is($results, <<"EOHTML", "Link anchor entity in a paragraph");
-#<p>A plain paragraph with a <a name="crossreferenceendpoint">.</p>
-#
-#EOHTML
+A plain paragraph with body tags turned on.
+EOPOD
+is($results, <<"EOHTML", "adding transitional css and html body tags");
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel='stylesheet' href='style.css' type='text/css' />
+</head><body>
+
+<p>A plain paragraph with body tags turned on.</p>
+
+</body>
+</html>
+
+EOHTML
+
+
+initialize($parser, $results);
+$parser->add_css_tags(1);
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with aN<footnote entry> and css tags.
+EOPOD
+is($results, <<"EOHTML", "css footnote entity in a paragraph");
+<p>A plain paragraph with a<font class="footnote"> (footnote: footnote
+entry)</font> and css tags.</p>
+
+EOHTML
+
+
+initialize($parser, $results);
+$parser->add_css_tags(1);
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with a U<http://test.url.com/stuff/and/junk.txt>.
+EOPOD
+is($results, <<"EOHTML", "URL entity in a paragraph");
+<p>A plain paragraph with a <font
+class="url">http://test.url.com/stuff/and/junk.txt</font>.</p>
+
+EOHTML
+
+initialize($parser, $results);
+$parser->parse_string_document(<<'EOPOD');
+=pod
+
+A plain paragraph with a Z<crossreferenceendpoint>.
+EOPOD
+is($results, <<"EOHTML", "Link anchor entity in a paragraph");
+<p>A plain paragraph with a <a name="crossreferenceendpoint" />.</p>
+
+EOHTML
 
 initialize($parser, $results);
 $parser->parse_string_document(<<'EOPOD');
