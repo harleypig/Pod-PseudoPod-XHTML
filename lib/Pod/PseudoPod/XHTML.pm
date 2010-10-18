@@ -9,7 +9,7 @@ use Carp;
 
 =head1 NAME
 
-Pod::PseudoPod::XHTML -- format PseudoPod as valid XHTML
+  - Pod::PseudoPod::XHTML -- format PseudoPod as valid XHTML
 
 =head1 VERSION
 
@@ -60,29 +60,26 @@ sub new {
 
 { # These definitions are found at http://www.w3.org/TR/xhtml1/#strict
 
-my %dtd = {
+my %dtd = (
 
   # XHTML 1.0 - Strict
 
-  'strict' => q{<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  'strict' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 },
 
   # XHTML 1.0 - Transitional
 
-  'transitional' => q{<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 },
 
   # XHTML 1.0 - Frameset
 
-  'frameset' => q{<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+  'frameset' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 },
-};
+);
 
 sub _set_dtd {
 
@@ -121,7 +118,6 @@ sub start_Document {
 $dtd
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 };
     $self->{ 'scratch' } .= "<link rel='stylesheet' href='style.css' type='text/css' />\n" if $self->{ 'css_tags' };
     $self->{ 'scratch' } .= q{</head><body>};
@@ -133,7 +129,20 @@ $dtd
 
 # Override inherited functions to handle self-contained tags and proper closing of tags.
 
-sub end_item_text   { $_[0]{'scratch'} = '</li>' }
+sub start_Para { $_[0]{ 'scratch' } .= '<p>' }
+
+sub start_item_text {
+
+  $_[0]{ 'scratch' } .= "</li>\n"
+    if exists $_[0]{ 'li_opened' };
+
+  $_[0]{ 'li_opened' }++;
+  $_[0]{ 'scratch' } .= "<li>";
+
+}
+
+sub end_item_text {}
+sub end_over_text { $_[0]{ 'scratch' } .= "</li>\n</ul>" ; $_[0]->emit( 'nowrap' ) }
 
 sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
 sub end_Z { $_[0]{'scratch'} .= '" />' }
@@ -150,7 +159,7 @@ Use the Transitional DTD.
 
 =head2 dtd_frameset
 
-Use the Frameset DTD
+Use the Frameset DTD.
 
 =head1 SEE ALSO
 
