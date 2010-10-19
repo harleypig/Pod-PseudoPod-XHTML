@@ -13,11 +13,11 @@ use Carp;
 
 =head1 VERSION
 
-Version 0.01
+Version 1.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '1.01';
 
 =head1 SYNOPSIS
 
@@ -150,17 +150,13 @@ Use the Strict DTD. (Default)
 
 Use the Transitional DTD.
 
-=head2 dtd_frameset
-
-Use the Frameset DTD.
-
 =head1 SEE ALSO
 
 L<Pod::PseudoPod::HTML>, L<Pod::PseudoPod>, L<Pod::Simple>
 
 =head1 AUTHOR
 
-Alan Young, C<< <alansyoungiii at gmail.com> >>
+Alan Young, C<< <harleypig at gmail.com> >>
 
 =head1 BUGS
 
