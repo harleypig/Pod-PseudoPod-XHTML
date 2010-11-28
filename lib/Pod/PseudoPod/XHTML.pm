@@ -1,5 +1,7 @@
 package Pod::PseudoPod::XHTML;
 
+# ABSTRACT: format PseudoPod as valid XHTML
+
 use warnings;
 use strict;
 
@@ -7,44 +9,7 @@ use base qw( Pod::PseudoPod::HTML );
 
 use Carp;
 
-=head1 NAME
-
-  - Pod::PseudoPod::XHTML -- format PseudoPod as valid XHTML
-
-=head1 VERSION
-
-Version 1.01
-
-=cut
-
-our $VERSION = '1.01';
-
-=head1 SYNOPSIS
-
-  use Pod::PseudoPod::XHTML;
-
-  my $parser = Pod::PseudoPod::XHTML->new();
-
-  ...
-
-  $parser->parse_file('path/to/file.pod');
-
-=head1 DESCRIPTION
-
-This class is a formatter that takes PseudoPod and renders it as
-valid XHTML.
-
-This is a subclass of L<Pod::PseudoPod::HTML>, and from there
-L<Pod::PseudoPod>, and inherits all their methods.
-
-This code has been shamelessly ripped off from L<Pod::PseudoPod::HTML> and
-jmcnamara's work on the Modern Perl epub book generator and massaged to work.
-
-=head1 EXPORT
-
-Nothing is exported.
-
-=cut
+# VERSION
 
 sub new {
 
@@ -140,6 +105,37 @@ sub end_over_text { $_[0]{ 'scratch' } .= "</li>\n</ul>" ; $_[0]->emit( 'nowrap'
 sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
 sub end_Z { $_[0]{'scratch'} .= '" />' }
 
+1; # End of Pod::PseudoPod::XHTML
+
+=pod
+
+=head1 NAME
+
+=head1 SYNOPSIS
+
+  use Pod::PseudoPod::XHTML;
+
+  my $parser = Pod::PseudoPod::XHTML->new();
+
+  ...
+
+  $parser->parse_file('path/to/file.pod');
+
+=head1 DESCRIPTION
+
+This class is a formatter that takes PseudoPod and renders it as
+valid XHTML.
+
+This is a subclass of L<Pod::PseudoPod::HTML>, and from there
+L<Pod::PseudoPod>, and inherits all their methods.
+
+This code has been shamelessly ripped off from L<Pod::PseudoPod::HTML> and
+jmcnamara's work on the Modern Perl epub book generator and massaged to work.
+
+=head1 EXPORT
+
+Nothing is exported.
+
 =head1 METHODS
 
 =head2 dtd_strict
@@ -216,6 +212,7 @@ by the Free Software Foundation; or the Artistic License.
 
 See http://dev.perl.org/licenses/ for more information.
 
+=for Pod::Coverage end_F end_Z end_item_text end_over_text start_Document start_Para start_item_text
+
 =cut
 
-1; # End of Pod::PseudoPod::XHTML
