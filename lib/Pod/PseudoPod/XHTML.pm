@@ -9,7 +9,7 @@ use base qw( Pod::PseudoPod::HTML );
 
 use Carp;
 
-# VERSION
+our $VERSION = '1.02'; # VERSION
 
 sub new {
 
@@ -23,46 +23,46 @@ sub new {
 
 }
 
-{ # These definitions are found at http://www.w3.org/TR/xhtml1/#strict
+{  # These definitions are found at http://www.w3.org/TR/xhtml1/#strict
 
-my %dtd = (
+  my %dtd = (
 
-  # XHTML 1.0 - Strict
+    # XHTML 1.0 - Strict
 
-  'strict' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    'strict' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 },
 
-  # XHTML 1.0 - Transitional
+    # XHTML 1.0 - Transitional
 
-  'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    'transitional' => q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 },
-);
+  );
 
-sub _set_dtd {
+  sub _set_dtd {
 
-  my ( $self, $type ) = @_;
+    my ( $self, $type ) = @_;
 
-  croak "unknown dtd ($type)" unless exists $dtd{ $type };
+    croak "unknown dtd ($type)" unless exists $dtd{ $type };
 
-  $self->{ 'dtd' } = $type;
+    $self->{ 'dtd' } = $type;
 
-}
+  }
 
-sub _get_dtd {
+  sub _get_dtd {
 
-  my $self = shift;
+    my $self = shift;
 
-  croak "unknown dtd ($self->{ 'dtd' })" unless exists $self->{ 'dtd' };
+    croak "unknown dtd ($self->{ 'dtd' })" unless exists $self->{ 'dtd' };
 
-  return $dtd{ $self->{ 'dtd' } };
+    return $dtd{ $self->{ 'dtd' } };
 
-}
+  }
 };
 
-sub dtd_strict       { $_[0]->_set_dtd( 'strict'       ) }
-sub dtd_transitional { $_[0]->_set_dtd( 'transitional' ) }
+sub dtd_strict       { $_[ 0 ]->_set_dtd( 'strict' ) }
+sub dtd_transitional { $_[ 0 ]->_set_dtd( 'transitional' ) }
 
 sub start_Document {
 
@@ -80,36 +80,44 @@ $dtd
     $self->{ 'scratch' } .= "<link rel='stylesheet' href='style.css' type='text/css' />\n" if $self->{ 'css_tags' };
     $self->{ 'scratch' } .= q{</head><body>};
 
-    $self->emit('nowrap');
+    $self->emit( 'nowrap' );
 
   }
-}
+} ## end sub start_Document
 
 # Override inherited functions to handle self-contained tags and proper closing of tags.
 
-sub start_Para { $_[0]{ 'scratch' } .= '<p>' }
+sub start_Para { $_[ 0 ]{ 'scratch' } .= '<p>' }
 
 sub start_item_text {
 
-  $_[0]{ 'scratch' } .= "</li>\n"
-    if exists $_[0]{ 'li_opened' };
+  $_[ 0 ]{ 'scratch' } .= "</li>\n"
+    if exists $_[ 0 ]{ 'li_opened' };
 
-  $_[0]{ 'li_opened' }++;
-  $_[0]{ 'scratch' } .= "<li>";
+  $_[ 0 ]{ 'li_opened' }++;
+  $_[ 0 ]{ 'scratch' } .= "<li>";
 
 }
 
-sub end_item_text {}
-sub end_over_text { $_[0]{ 'scratch' } .= "</li>\n</ul>" ; $_[0]->emit( 'nowrap' ) }
+sub end_item_text { }
+sub end_over_text { $_[ 0 ]{ 'scratch' } .= "</li>\n</ul>"; $_[ 0 ]->emit( 'nowrap' ) }
 
-sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</em>' }
-sub end_Z { $_[0]{'scratch'} .= '" />' }
+sub end_F { $_[ 0 ]{ 'scratch' } .= ( $_[ 0 ]{ 'in_figure' } ) ? '" />' : '</em>' }
+sub end_Z { $_[ 0 ]{ 'scratch' } .= '" />' }
 
-1; # End of Pod::PseudoPod::XHTML
+1;  # End of Pod::PseudoPod::XHTML
 
+
+__END__
 =pod
 
 =head1 NAME
+
+Pod::PseudoPod::XHTML - format PseudoPod as valid XHTML
+
+=head1 VERSION
+
+version 1.02
 
 =head1 SYNOPSIS
 
@@ -128,6 +136,8 @@ L<Pod::PseudoPod>, and inherits all their methods.
 
 This code has been shamelessly ripped off from L<Pod::PseudoPod::HTML> and
 jmcnamara's work on the Modern Perl epub book generator and massaged to work.
+
+=head1 NAME
 
 =head1 EXPORT
 
@@ -210,6 +220,17 @@ by the Free Software Foundation; or the Artistic License.
 See http://dev.perl.org/licenses/ for more information.
 
 =for Pod::Coverage end_F end_Z end_item_text end_over_text start_Document start_Para start_item_text
+
+=head1 AUTHOR
+
+Alan Young <harleypig@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Alan Young.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
 
