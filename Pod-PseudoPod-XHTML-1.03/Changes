@@ -1,0 +1,26 @@
+==============================
+9999-99-99 99:99:99 +0000 HEAD
+==============================
+
+  commit 3e4d3f9b32e7b5577701e81949c236edb78c110e
+  Author: Harley Pig <harleypig@gmail.com>
+  Date:   Mon Aug 22 12:01:25 2011 -0600
+  
+    fix tests and update code to match new version of
+    Pod::PseudoPod::HTML
+
+  commit 9ad735d16321c372e7fea3cd38c79f1ff9809f71
+  Author: Harley Pig <harleypig@gmail.com>
+  Date:   Sun Nov 28 08:50:25 2010 -0700
+  
+    moved to Dist::Zilla
+
+  commit 8981b563caea1a971f8c6fc2746e73701e3b2606
+  Author: Harley Pig <harleypig@gmail.com>
+  Date:   Mon Oct 18 22:56:43 2010 -0600
+  
+    Version and documentation changes 
+
+===================================
+End of changes in the last 365 days
+===================================

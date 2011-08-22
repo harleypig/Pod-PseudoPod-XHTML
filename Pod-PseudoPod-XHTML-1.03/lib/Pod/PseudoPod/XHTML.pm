@@ -9,7 +9,7 @@ use base qw( Pod::PseudoPod::HTML );
 
 use Carp;
 
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '1.03';  # VERSION
 
 sub new {
 
@@ -107,8 +107,8 @@ sub end_Z { $_[ 0 ]{ 'scratch' } .= '" />' }
 
 1;  # End of Pod::PseudoPod::XHTML
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -117,17 +117,9 @@ Pod::PseudoPod::XHTML - format PseudoPod as valid XHTML
 
 =head1 VERSION
 
-version 0.001
+version 1.03
 
 =head1 SYNOPSIS
-
-  use Pod::PseudoPod::XHTML;
-
-  my $parser = Pod::PseudoPod::XHTML->new();
-
-  ...
-
-  $parser->parse_file('path/to/file.pod');
 
 =head1 DESCRIPTION
 
@@ -141,6 +133,18 @@ This code has been shamelessly ripped off from L<Pod::PseudoPod::HTML> and
 jmcnamara's work on the Modern Perl epub book generator and massaged to work.
 
 =head1 NAME
+
+=head1 VERSION
+
+version 1.03
+
+  use Pod::PseudoPod::XHTML;
+
+  my $parser = Pod::PseudoPod::XHTML->new();
+
+  ...
+
+  $parser->parse_file('path/to/file.pod');
 
 =head1 EXPORT
 
@@ -226,7 +230,7 @@ See http://dev.perl.org/licenses/ for more information.
 
 =head1 AUTHOR
 
-Alan Young <harleypig@gmail.com>
+Alan Young <alansyoungiii@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -236,4 +240,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
