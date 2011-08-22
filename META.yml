@@ -22,7 +22,7 @@ license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: DateTimeX-Duration-SkipDays
+name: Pod-PseudoPod-XHTML
 no_index:
   directory:
     - t
@@ -38,6 +38,6 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: https://github.com/harleypig/datetimex-duration-skipdays/issues
-  repository: git://github.com/harleypig/datetimex-duration-skipdays.git
+  bugtracker: https://github.com/harleypig/pod-pseudopod-xhtml/issues
+  repository: git://github.com/harleypig/pod-pseudopod-xhtml.git
 version: 0.001

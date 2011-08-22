@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "DateTimeX-Duration-SkipDays",
+   "name" : "Pod-PseudoPod-XHTML",
    "no_index" : {
       "directory" : [
          "t",
@@ -63,12 +63,12 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/harleypig/datetimex-duration-skipdays/issues"
+         "web" : "https://github.com/harleypig/pod-pseudopod-xhtml/issues"
       },
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/harleypig/datetimex-duration-skipdays.git",
-         "web" : "https://github.com/harleypig/datetimex-duration-skipdays"
+         "url" : "git://github.com/harleypig/pod-pseudopod-xhtml.git",
+         "web" : "https://github.com/harleypig/pod-pseudopod-xhtml"
       }
    },
    "version" : "0.001"

@@ -26,10 +26,10 @@ my %module_build_args = (
   "dist_author" => [
     "Alan Young <harleypig\@gmail.com>"
   ],
-  "dist_name" => "DateTimeX-Duration-SkipDays",
+  "dist_name" => "Pod-PseudoPod-XHTML",
   "dist_version" => "0.001",
   "license" => "perl",
-  "module_name" => "DateTimeX::Duration::SkipDays",
+  "module_name" => "Pod::PseudoPod::XHTML",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
