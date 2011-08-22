@@ -102,7 +102,7 @@ sub start_item_text {
 sub end_item_text {}
 sub end_over_text { $_[0]{ 'scratch' } .= "</li>\n</ul>" ; $_[0]->emit( 'nowrap' ) }
 
-sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</i>' }
+sub end_F { $_[0]{'scratch'} .= ($_[0]{'in_figure'}) ? '" />' : '</em>' }
 sub end_Z { $_[0]{'scratch'} .= '" />' }
 
 1; # End of Pod::PseudoPod::XHTML
