@@ -116,9 +116,6 @@ sub end_Z { $_[0]{'scratch'} .= '" />' }
   use Pod::PseudoPod::XHTML;
 
   my $parser = Pod::PseudoPod::XHTML->new();
-
-  ...
-
   $parser->parse_file('path/to/file.pod');
 
 =head1 DESCRIPTION
