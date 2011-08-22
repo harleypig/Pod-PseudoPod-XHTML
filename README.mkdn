@@ -4,7 +4,7 @@ Pod::PseudoPod::XHTML - format PseudoPod as valid XHTML
 
 # VERSION
 
-version 1.02
+version 0.001
 
 # SYNOPSIS
 
