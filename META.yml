@@ -30,7 +30,7 @@ no_index:
 provides:
   Pod::PseudoPod::XHTML:
     file: lib/Pod/PseudoPod/XHTML.pm
-    version: 1.02
+    version: 0.001
 requires:
   Carp: 0
   Pod::PseudoPod::HTML: 0
@@ -40,4 +40,4 @@ requires:
 resources:
   bugtracker: https://github.com/harleypig/pod-pseudopod-xhtml/issues
   repository: git://github.com/harleypig/pod-pseudopod-xhtml.git
-version: 1.02
+version: 0.001

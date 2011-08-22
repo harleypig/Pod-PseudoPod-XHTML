@@ -9,7 +9,7 @@ use base qw( Pod::PseudoPod::HTML );
 
 use Carp;
 
-our $VERSION = '1.02'; # VERSION
+our $VERSION = '0.001'; # VERSION
 
 sub new {
 
@@ -117,16 +117,13 @@ Pod::PseudoPod::XHTML - format PseudoPod as valid XHTML
 
 =head1 VERSION
 
-version 1.02
+version 0.001
 
 =head1 SYNOPSIS
 
   use Pod::PseudoPod::XHTML;
 
   my $parser = Pod::PseudoPod::XHTML->new();
-
-  ...
-
   $parser->parse_file('path/to/file.pod');
 
 =head1 DESCRIPTION
