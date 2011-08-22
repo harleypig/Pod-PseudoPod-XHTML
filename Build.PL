@@ -27,7 +27,7 @@ my %module_build_args = (
     "Alan Young <harleypig\@gmail.com>"
   ],
   "dist_name" => "Pod-PseudoPod-XHTML",
-  "dist_version" => "0.001",
+  "dist_version" => "1.02",
   "license" => "perl",
   "module_name" => "Pod::PseudoPod::XHTML",
   "recommends" => {},

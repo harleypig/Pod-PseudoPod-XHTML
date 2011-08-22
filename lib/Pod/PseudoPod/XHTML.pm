@@ -9,7 +9,7 @@ use base qw( Pod::PseudoPod::HTML );
 
 use Carp;
 
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '1.02'; # VERSION
 
 sub new {
 
@@ -117,7 +117,7 @@ Pod::PseudoPod::XHTML - format PseudoPod as valid XHTML
 
 =head1 VERSION
 
-version 0.001
+version 1.02
 
 =head1 SYNOPSIS
 

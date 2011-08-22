@@ -57,7 +57,7 @@
    "provides" : {
       "Pod::PseudoPod::XHTML" : {
          "file" : "lib/Pod/PseudoPod/XHTML.pm",
-         "version" : "0.001"
+         "version" : "1.02"
       }
    },
    "release_status" : "stable",
@@ -71,6 +71,6 @@
          "web" : "https://github.com/harleypig/pod-pseudopod-xhtml"
       }
    },
-   "version" : "0.001"
+   "version" : "1.02"
 }
 
