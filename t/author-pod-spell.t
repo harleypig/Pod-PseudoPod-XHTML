@@ -23,8 +23,17 @@ set_spell_cmd( 'aspell list' );
 add_stopwords( <DATA> );
 all_pod_files_spelling_ok( 'lib' );
 __DATA__
-DateTime
-RRULE
+ACKNOWLEDGEMENTS
+AnnoCPAN
+CPAN
+DTD
+epub
+formatter
+github
+jmcnamara
+jmcnamara's
+PseudoPod
+XHTML
 Alan
 Young
 Alan
